@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "tailwindcss/tailwind.css";
 import {NEXT_PUBLIC_IMAGE_BASE_URL } from "./config";
 import { getMovies } from "./Utilities/utils";
+import Link from "next/link"
 
 interface Movie {
   id: number;
@@ -30,12 +31,14 @@ export default function Home() {
     })();
   }, []);
   return (
+  
     
   <main>
     <p className="text-3xl "> Available Movies</p>
   <div className="grid grid-cols-5 gap-4 bg-white">
     {movies &&
       movies.results.map((item) => (
+        <Link href={`/movie/${item.id}`} key={item.id}>
         <div
           key={item.id}
           className="relative overflow-hidden bg-white p-4 rounded shadow transition-transform hover:transform hover:translate-y-0 hover:-translate-x-2 hover:scale-105"
@@ -54,8 +57,14 @@ export default function Home() {
             </div>
           </div>
         </div>
+        </Link>
+
       ))}
+
   </div>
+
 </main>
+
+
   );
 }
